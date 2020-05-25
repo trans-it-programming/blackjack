@@ -1,0 +1,57 @@
+@startuml
+scale 1.2
+class Card{
+	- {field} suit (マーク)
+	- {field} number (数字)
+	+ {method} getSuite (マークを取得)
+	+ {method} getNumber (数字を取得)
+	+ {static}{method} getAllCards (全てのカードを取得)
+}
+note right: カード
+
+class Stock {
+	- {field} cards (カード)
+	+ {method} initialize (初期化)
+	+ {method} getNumberOfCards (枚数取得)
+	+ {method} pick (カードを引く)
+}
+note left: 山札
+
+class Attender {
+	# {field} cards (手札)
+	# {field} name (プレイヤー名)
+	+ {method} getName (名前を取得する)
+	+ {method} start (開始・手札を2枚引く)
+	+ {method} hit (手札を一枚引く)
+	+ {method} calculateStrength (手札の強さを計算する)
+	+ {method} display (手札情報を表示する)
+	+ {method}{abstract} play (プレイする)
+}
+note left: 参加者。プレイヤーとディーラーの共通部分
+
+class Player {
+	+ {method} play (プレイする)
+	- {method} selectAction (アクションを選択する)
+}
+note bottom: プレイヤー (ユーザー)
+
+class Dealer {
+    - {field} opened (オープン状態)
+	+ {method} play (プレイする)
+}
+note bottom: ディーラー (コンピューター)
+
+class BlackJack {
+	+ {method} {static} main (メインメソッド)
+	+ {method} {static} start (ゲームを開始する)
+	+ {method} {static} showResult (結果を表示する)
+}
+note bottom: ゲーム実行クラス
+
+Stock *- Card
+Attender o-up- Card
+Attender <|-down- Player
+Attender <|-down- Dealer
+
+
+@enduml

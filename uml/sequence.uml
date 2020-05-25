@@ -1,0 +1,66 @@
+@startuml
+actor User
+User -> BlackJack: ゲーム開始
+BlackJack -> BlackJack: start
+activate BlackJack
+create Player
+BlackJack -> Player: new
+create Dealer
+BlackJack -> Dealer: new
+create Stock
+BlackJack -> Stock: new
+BlackJack -> Player: start
+activate Player
+Player -> Stock: pick
+activate Stock
+deactivate Stock
+deactivate Player
+BlackJack -> Dealer: start
+activate Dealer
+Dealer -> Stock: pick
+activate Stock
+deactivate Stock
+deactivate Dealer
+BlackJack -> Dealer: display
+activate Dealer
+deactivate Dealer
+BlackJack -> Player: play
+activate Player
+Player -> Player: selectAction
+activate Player
+Player -> User: アクション選択要求
+User --> Player: アクション (1. Hit, 2. Stand)
+deactivate Player
+Player -> Stock: pick
+activate Stock
+deactivate Stock
+deactivate Player
+BlackJack -> Dealer: play
+activate Dealer
+Dealer -> Stock: pick
+activate Stock
+deactivate Stock
+deactivate Dealer
+BlackJack -> BlackJack: showResult
+activate BlackJack
+BlackJack -> Dealer: display
+activate Dealer
+deactivate Dealer
+BlackJack -> Player: display
+activate Player
+deactivate Player
+BlackJack -> Dealer: calculateStrength
+activate Dealer
+Dealer --> BlackJack: 手札の強さ
+deactivate Dealer
+BlackJack -> Player: calculateStrength
+activate Player
+Player --> BlackJack: 手札の強さ
+deactivate Player
+deactivate BlackJack
+deactivate BlackJack
+
+
+
+
+@enduml
