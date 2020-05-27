@@ -15,8 +15,20 @@ public class BlackJack {
 		Dealer dealer = new Dealer();
 		Player player = new Player(scanner);
 
-		// まだ途中
+		Attender[] attenders = { player, dealer };
 
+		for (int i = 0; i < attenders.length; i++) {
+			Attender attender = attenders[i];
+			attender.start(stock);
+		}
+		dealer.display();
+
+		for (int i = 0; i < attenders.length; i++) {
+ 			Attender attender = attenders[i];
+			attender.play(stock);
+		}
+
+		showResult(player, dealer);
 	}
 
 	public static void showResult(Attender player, Attender dealer) {
