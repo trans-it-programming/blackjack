@@ -1,19 +1,23 @@
 package jp.trans_it.game.blackjack;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class BlackJack {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		start(scanner);
-		scanner.close();
+	public static void main(String[] args) throws IOException {
+		BufferedReader reader = new BufferedReader(
+			new InputStreamReader(System.in)
+		);
+		start(reader);
+		reader.close();
 	}
 
-	public static void start(Scanner scanner) {
+	public static void start(BufferedReader reader) throws IOException {
 		Stock stock = new Stock();
 
 		Dealer dealer = new Dealer();
-		Player player = new Player(scanner);
+		Player player = new Player(reader);
 
 		Attender[] attenders = { player, dealer };
 

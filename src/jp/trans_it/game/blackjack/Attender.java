@@ -1,5 +1,6 @@
 package jp.trans_it.game.blackjack;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public abstract class Attender {
@@ -75,5 +76,5 @@ public abstract class Attender {
 		System.out.println(this.toString());
 	}
 
-	public abstract void play(Stock stock);
+	public abstract void play(Stock stock) throws IOException;
 }
