@@ -1,20 +1,12 @@
 package jp.trans_it.game.blackjack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * カード管理クラス
  */
 public class Card {
-	public enum Suit {
-		/** スペード */
-		SPADE,
-		/** ハート */
-		HEART,
-		/** ダイヤ */		
-		DIAMOND,
-		/** クラブ */
-		CLUB
-	}
-
 	private Suit suit;
 	private int number;
 
@@ -42,30 +34,6 @@ public class Card {
 	 */
 	public int getNumber() {
 		return number;
-	}
-
-	/**
-	 * マーク情報の文字列を取得する。
-	 * (例: Suit.SPADE -> スペード)
-	 * @param suit マーク情報
-	 * @return 文字列
-	 */
-	public static String getSuitString(Suit suit) {
-		String string = null;
-
-		if(suit == Suit.SPADE) {
-			string = "スペード";
-		}
-		else if(suit == Suit.HEART) {
-			string = "ハート";
-		}
-		else if(suit == Suit.DIAMOND) {
-			string = "ダイヤ";
-		}
-		else if(suit == Suit.CLUB) {
-			string = "クラブ";
-		}
-		return string;
 	}
 
 	/**
@@ -101,34 +69,26 @@ public class Card {
 	 * (例: [スペードA], [スペード2], ...)
 	 */
 	public String toString() {
-		String suit = getSuitString(this.suit);
-		String number = getNumberString(this.number);
-
-		String string = "[]";
-		if(suit != null && number != null) {
-			string = "[" + suit + number + "]";
-		}
-
+		String string = String.format(
+			"[%s%s]", this.suit.getName(), getNumberString(this.number)
+		);
 		return string;
 	}
 
 	/**
 	 * 52枚の全てのカードを取得する。
-	 * @return 52枚のカードの配列
+	 * @return 52枚のカードのリスト
 	 */
-	public static Card[] getAllCards() {
-		Card[] cards = new Card[52];
-		int index = 0;
-
-		Suit[] suits = {Suit.SPADE, Suit.HEART, Suit.CLUB, Suit.DIAMOND};
-		for(int i = 0; i < suits.length; i++) {
-			Suit suit = suits[i];
+	public static List<Card> getAllCards() {
+		List<Card> list = new ArrayList<Card>();
+		
+		for(Suit suit : Suit.values()) {
 			for(int number = 1; number <= 13; number++) {
 				Card card = new Card(suit, number);
-				cards[index] = card;
-				index++;
+				list.add(card);
 			}
 		}
-		return cards;
+
+		return list;
 	}
 }

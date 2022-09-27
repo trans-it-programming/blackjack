@@ -2,9 +2,10 @@ package jp.trans_it.game.blackjack;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Attender {
-	protected ArrayList<Card> cards;
+	protected List<Card> cards;
 	protected String name;
 
 	public Attender(String name) {
@@ -33,12 +34,11 @@ public abstract class Attender {
 		this.cards.add(card);
 	}
 
-	public int calculateStrength() {
+	public static int calculateStrengthFromList(List<Card> list) {
 		int strength = 0;
 		int aceCount = 0;
 
-		for(int i = 0; i < this.cards.size(); i++) {
-			Card card = cards.get(i);
+		for(Card card : list) {
 			int number = card.getNumber();
 			if(number == 1) {
 				strength = strength + 11;
@@ -60,6 +60,11 @@ public abstract class Attender {
 			strength = 0;
 		}
 
+		return strength;
+	}
+	
+	public int calculateStrength() {
+		int strength = calculateStrengthFromList(this.cards);
 		return strength;
 	}
 

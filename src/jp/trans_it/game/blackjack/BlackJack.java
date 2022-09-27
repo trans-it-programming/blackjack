@@ -21,14 +21,13 @@ public class BlackJack {
 
 		Attender[] attenders = { player, dealer };
 
-		for (int i = 0; i < attenders.length; i++) {
-			Attender attender = attenders[i];
+		for (Attender attender : attenders) {
 			attender.start(stock);
 		}
+		
 		dealer.display();
-
-		for (int i = 0; i < attenders.length; i++) {
- 			Attender attender = attenders[i];
+		
+		for (Attender attender : attenders) {
 			attender.play(stock);
 		}
 

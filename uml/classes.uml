@@ -1,5 +1,11 @@
 @startuml
 scale 1.2
+
+class Suit{
+ 	- {field} name (名前)
+}
+note top: マーク
+
 class Card{
 	- {field} suit (マーク)
 	- {field} number (数字)
@@ -7,7 +13,7 @@ class Card{
 	+ {method} getNumber (数字を取得)
 	+ {static}{method} getAllCards (全てのカードを取得)
 }
-note right: カード
+note top: カード
 
 class Stock {
 	- {field} cards (カード)
@@ -48,6 +54,7 @@ class BlackJack {
 }
 note bottom: ゲーム実行クラス
 
+Card *- Suit
 Stock *- Card
 Attender o-up- Card
 Attender <|-down- Player

@@ -1,32 +1,39 @@
 package jp.trans_it.game.blackjack.test;
 
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import jp.trans_it.game.blackjack.Attender;
-import jp.trans_it.game.blackjack.Stock;
+import jp.trans_it.game.blackjack.Card;
+import jp.trans_it.game.blackjack.Suit;
 
 class AttenderTest {
 
 	@Test
 	void testStrength() {
-		Stock stock = new Stock();
-		Attender attender = new Attender("Test") {
-			@Override
-			public void play(Stock stock) {
+		List<Card> cards = new ArrayList<Card>();
+		cards.add(new Card(Suit.SPADE, 7));
+		cards.add(new Card(Suit.HEART, 1));
+		cards.add(new Card(Suit.DIAMOND, 12));
+		cards.add(new Card(Suit.CLUB, 1));
+		cards.add(new Card(Suit.DIAMOND, 13));
+		
+		int[] strengthArray = {7, 18, 18, 19, 0};
+		
+		for(int i = 0; i < cards.size(); i++) {
+			List<Card> subList = cards.subList(0, i + 1);
+			int strength = Attender.calculateStrengthFromList(subList);
+			
+			System.out.println("Cards: " + subList);
+			System.out.println("Strength: " + strength);
+			
+			if(strength != strengthArray[i]) {
+				fail("値が違います。");
 			}
-		};
-
-
-		for(int i = 0; i < 5; i++) {
-			if(i == 0) {
-				attender.start(stock);
-			}
-			else {
-				attender.hit(stock);
-			}
-			int strength = attender.calculateStrength();
-			System.out.println(attender);
-			System.out.println("Strength = " + strength);
 		}
 	}
 }

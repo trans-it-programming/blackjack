@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Player extends Attender {
 
-	public static final int ACTION_HIT = 1;
+	public static final int ACTION_HIT   = 1;
 	public static final int ACTION_STAND = 2;
 
 	private BufferedReader reader;
@@ -44,8 +44,11 @@ public class Player extends Attender {
 	}
 
 	private int selectAction() throws IOException {
-		String selectMessage = "[" + ACTION_HIT + "] Hit (カードを引く) "
-				               + "    [" + ACTION_STAND + "] Stand (勝負する)";
+		String selectMessage = String.format(
+			"[%d] Hit (カードを引く), [%d] Stand (勝負する",
+			ACTION_HIT,
+			ACTION_STAND
+		);
 		System.out.println(selectMessage);
 		int action = 0;
 		while(action != ACTION_HIT && action != ACTION_STAND) {
